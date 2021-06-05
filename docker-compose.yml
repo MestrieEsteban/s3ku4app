@@ -1,0 +1,28 @@
+version: '3.7'
+services:
+  backend:
+    container_name: api
+    build:
+      dockerfile: ./dockerfile
+      context: ./
+    ports:
+      - "4243:4242"
+    networks:
+      - turreta_network
+    depends_on:
+      - postgres
+  postgres:
+   container_name: db
+   image: "postgres:13"
+   restart: "always"
+   ports:
+      - "5434:5432"
+   environment:
+     - POSTGRES_USER=DB_user
+     - POSTGRES_PASSWORD=DB_password
+     - POSTGRES_DB=DB_name
+   networks:
+     - turreta_network
+networks:
+  turreta_network:
+    driver: bridge
