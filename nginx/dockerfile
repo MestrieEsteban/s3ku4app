@@ -1,0 +1,6 @@
+FROM fabiocicerchia/nginx-lua
+RUN apt update 
+RUN apt install -y lua-rest
+EXPOSE 443
+STOPSIGNAL SIGTERM
+CMD ["nginx", "-g", "daemon off;"]
