@@ -1,28 +1,47 @@
-version: '3.7'
+version: '3.9'
 services:
   backend:
-    container_name: api
+    container_name: template-ts-api
     build:
       dockerfile: ./dockerfile
       context: ./
     ports:
       - "4243:4242"
     networks:
-      - turreta_network
+      - sk3u4pp_network
     depends_on:
       - postgres
   postgres:
-   container_name: db
-   image: "postgres:13"
-   restart: "always"
-   ports:
+    container_name: template-ts-db
+    image: "postgres:latest"
+    restart: "always"
+    ports:
       - "5434:5432"
-   environment:
-     - POSTGRES_USER=DB_user
-     - POSTGRES_PASSWORD=DB_password
-     - POSTGRES_DB=DB_name
-   networks:
-     - turreta_network
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=2d0
+    networks:
+      - sk3u4pp_network
+  reverse-proxy:
+    image: nginx:latest
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./cert:/etc/nginx/cert
+      - ./nginx/include:/etc/nginx/conf.d/include
+      - ./nginx/site:/etc/nginx/site
+    ports:
+      - 443:443
+    networks:
+      - sk3u4pp_network
+    depends_on:
+      - backend
+  redis:
+    build: ./redis
+    restart: unless-stopped
+    container_name: redis
+    networks:
+      - sk3u4pp_network
 networks:
-  turreta_network:
+  sk3u4pp_network:
     driver: bridge
