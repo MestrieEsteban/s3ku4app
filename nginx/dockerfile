@@ -1,6 +1,10 @@
-FROM fabiocicerchia/nginx-lua
-RUN apt update 
-RUN apt install -y lua-rest
+# Dockerfile
+FROM openresty/openresty:alpine
+
+COPY conf.d /etc/nginx/conf.d
+COPY certs /etc/nginx/certs
+COPY limit.lua /usr/local/openresty/nginx/resty/rate/limit.lua
+
 EXPOSE 443
-STOPSIGNAL SIGTERM
+STOPSIGNAL SIGQUIT
 CMD ["nginx", "-g", "daemon off;"]
