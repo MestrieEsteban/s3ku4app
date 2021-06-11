@@ -8,7 +8,7 @@ template : https://github.com/MestrieEsteban/gizmo-api
 
 ## Stack
 Node js + Express + Prisma `./src` <br />
-Nginx reverse proxy mode `./nginx/nginx.conf` and `./nginx/conf.d` <br />
+Openresty reverse proxy mode `./nginx/nginx.conf` and `./nginx/conf.d` <br />
 Redis with Lua configuration `./nginx/limit.lua` and `./nginx/nginx.conf` <br />
 ### How to run ?
 1. Run `docker-compose up -d --build`
