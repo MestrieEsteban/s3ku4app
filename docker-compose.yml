@@ -40,6 +40,8 @@ services:
       - 6379:6379
     networks:
       - sk3u4pp_network
+    depends_on:
+      - openrestry
 networks:
   sk3u4pp_network:
     driver: bridge
