@@ -15,7 +15,7 @@ Redis with Lua configuration `./nginx/limit.lua` and `./nginx/nginx.conf` <br />
 2. Go to .env file and replace this line  `DATABASE_URL=postgres://root:root@postgres:5432/2d0` <br /> to `DATABASE_URL=postgres://root:root@localhost:5434/2d0`
 3. Run `npx prisma migrate dev --name "init" --preview-feature`
 4. You can add VHost `127.0.0.1 s3ku4pp.com`
-5. Got to `https://localhost:10443/` or `https://s3ku4pp.com:10443/`
+5. Go to `https://localhost:10443/` or `https://s3ku4pp.com:10443/`
 
 ### Postman
 https://we.tl/t-lM4IZ305ts
